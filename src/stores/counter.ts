@@ -13,11 +13,18 @@ interface records {
   date: string
   point: number
 }
+interface pushInButList {
+  src: string
+  name: string
+  date: string
+  price: number
+}
 export const useCounterStore = defineStore('counter', () => {
   let userAcc: Ref<string> = ref('')
   let userPassword: Ref<number | string> = ref('')
   let loginCheck: Ref<boolean> = ref(false)
   let allRecords: Ref<records[]> = ref([])
+  let allBuyList: Ref<pushInButList[]> = ref([])
   const person: Member = reactive({
     acc: 'nan',
     password: 'nan',
@@ -36,5 +43,5 @@ export const useCounterStore = defineStore('counter', () => {
     }
   }
 
-  return { userAcc, userPassword, login, person, loginCheck, allRecords }
+  return { userAcc, userPassword, login, person, loginCheck, allRecords, allBuyList }
 })

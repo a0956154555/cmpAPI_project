@@ -21,18 +21,26 @@ onMounted(() => {
   // 执行你的逻辑，例如路由导航
   router.push('/createAcc')
 })
-let headerAllArr: string[] = reactive(['創建/登入', '遊戲紀錄', '遊戲區', '購物商城', '購買清單'])
+let headerAllArr: string[] = reactive([
+  '創建/登入',
+  '遊戲紀錄',
+  '遊戲區',
+  '購物商城',
+  '購買清單',
+  'test'
+])
 let allLink: string[] = reactive([
   '/createAcc',
   '/gameRecord',
   '/gameBox',
   '/shopping',
-  '/buyLists'
+  '/buyLists',
+  '/test'
 ])
 </script>
 
 <template>
-  <div class="headerAll">
+  <!-- <div class="headerAll">
     <router-link v-for="(i, index) in headerAllArr" :to="allLink[index]" :key="index">{{
       i
     }}</router-link>
@@ -41,23 +49,190 @@ let allLink: string[] = reactive([
       <span>點數:{{ counterStore.person.point }}</span>
       <button @click="logOutMember">登出</button>
     </div>
-  </div>
+  </div> -->
+
+  <header class="header">
+    <a href="" class="logo">TS</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
+      <router-link
+        v-for="(i, index) in headerAllArr"
+        :to="allLink[index]"
+        :key="index"
+        class="singleLink"
+        >{{ i }}</router-link
+      >
+      <!-- <li><a href="#work">Our Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#contact">Contact</a></li> -->
+    </ul>
+  </header>
 </template>
 
 <style lang="scss" scoped>
-.headerAll {
-  border: 1px black solid;
+// .headerAll {
+//   border: 1px black solid;
+//   width: 100%;
+//   display: flex;
+//   padding: 10px 0px;
+//   justify-content: space-around;
+//   .personInfo {
+//     span {
+//       &:first-child,
+//       &:nth-child(2) {
+//         margin-right: 10px;
+//       }
+//     }
+//   }
+// }
+
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  background-color: #f4f4f4;
+}
+
+a {
+  color: #000;
+}
+
+/* header */
+
+.header {
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+  // position: fixed;
   width: 100%;
+  z-index: 3;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
   display: flex;
-  padding: 10px 0px;
-  justify-content: space-around;
-  .personInfo {
-    span {
-      &:first-child,
-      &:nth-child(2) {
-        margin-right: 10px;
-      }
-    }
+  .singleLink {
+    display: block;
+    padding: 20px 20px;
+    border-right: 1px solid #f4f4f4;
+    text-decoration: none;
+  }
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background 0.2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all 0.2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="shoppingAll">
-    <div v-for="i in allCards" class="sigleCardAll" @click="checkBuy(i.name, i.price)">
+    <div v-for="i in allCards" class="sigleCardAll" @click="checkBuy(i.name, i.price, i.picRoute)">
       <img :src="i.picRoute" alt="" />
       <div>{{ i.name }}</div>
       <div>需要 : {{ i.price }} 點</div>
@@ -14,13 +14,28 @@ import { computed, ref, reactive } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 const counterStore = useCounterStore()
-const checkBuy = (name: string, price: number): void => {
+
+const checkBuy = (name: string, price: number, src: string): void => {
   if (counterStore.person.point < price) {
     alert('點數不足')
     return
   }
   if (confirm(`是否購買${name}? `)) {
     counterStore.person.point -= price
+    interface pushInButList {
+      src: string
+      name: string
+      date: string
+      price: number
+    }
+    const newOne: pushInButList = {
+      src: src,
+      name: name,
+      date: `${new Date().getMonth() + 1}/${new Date().getDate()}`,
+      price: price
+    }
+    counterStore.allBuyList.push(newOne)
+    console.log(counterStore.allBuyList)
   }
 }
 interface singlePic {
