@@ -54,7 +54,7 @@ let allLink: string[] = reactive([
   <header class="header">
     <a href="" class="logo"
       >{{ counterStore.person.acc == 'nan' ? 'TS' : 'USER : ' + counterStore.person.acc }}
-      <span v-if="counterStore.person.acc !== 'nan'">Piont:{{ counterStore.person.point }}</span></a
+      <span v-if="counterStore.person.acc !== 'nan'">Point:{{ counterStore.person.point }}</span></a
     >
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
