@@ -115,7 +115,7 @@ import { useCounterStore } from '../stores/counter'
 import { nextTick } from 'vue'
 import { computed, ref, reactive } from 'vue'
 import type { Ref } from 'vue'
-
+import { useLocalStorage } from '@vueuse/core'
 const counterStore = useCounterStore()
 // 註冊帳密
 const signAccPattern = /^(?=.*[a-zA-Z]).{8,12}$/
