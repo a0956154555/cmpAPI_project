@@ -2,13 +2,13 @@
   <div class="recordsAll">
     <div v-if="allRec.length < 1 || !counterStore.loginCheck">目前為空</div>
     <div class="recordsTitle" v-if="allRec.length >= 1 && counterStore.loginCheck">
-      <div>信箱</div>
+      <div>帳號</div>
       <div>日期</div>
       <div>點數</div>
     </div>
     <div class="recordsBox" v-if="allRec.length >= 1 && counterStore.loginCheck">
       <div v-for="i in allRec" class="singleRecord">
-        <div>{{ i.email }}</div>
+        <div>{{ i.acc }}</div>
         <div>{{ i.date }}</div>
         <div>{{ i.point }}</div>
       </div>

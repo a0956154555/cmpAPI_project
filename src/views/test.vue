@@ -1,168 +1,226 @@
 <template>
-  <head>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet" />
-  </head>
+  <svg viewBox="0 0 0 0" style="position: absolute; z-index: -1; opacity: 0">
+    <defs>
+      <linearGradient id="boxGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="25" y2="25">
+        <stop offset="0%" stop-color="#27FDC7" />
+        <stop offset="100%" stop-color="#0FC0F5" />
+      </linearGradient>
 
-  <body>
-    <div class="container">
-      <div class="card">
-        <h3 class="title">Card 1</h3>
-        <div class="bar">
-          <div class="emptybar"></div>
-          <div class="filledbar"></div>
-        </div>
-        <div class="circle">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <circle class="stroke" cx="60" cy="60" r="50" />
-          </svg>
-        </div>
-      </div>
-      <div class="card">
-        <h3 class="title">Card 2</h3>
-        <div class="bar">
-          <div class="emptybar"></div>
-          <div class="filledbar"></div>
-        </div>
-        <div class="circle">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <circle class="stroke" cx="60" cy="60" r="50" />
-          </svg>
-        </div>
-      </div>
-      <div class="card">
-        <h3 class="title">Card 3</h3>
-        <div class="bar">
-          <div class="emptybar"></div>
-          <div class="filledbar"></div>
-        </div>
-        <div class="circle">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <circle class="stroke" cx="60" cy="60" r="50" />
-          </svg>
-        </div>
-      </div>
-      <div class="card">
-        <h3 class="title">Card 4</h3>
-        <div class="bar">
-          <div class="emptybar"></div>
-          <div class="filledbar"></div>
-        </div>
-        <div class="circle">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <circle class="stroke" cx="60" cy="60" r="50" />
-          </svg>
-        </div>
-      </div>
-    </div>
-  </body>
+      <linearGradient id="lineGradient">
+        <stop offset="0%" stop-color="#0FC0F5" />
+        <stop offset="100%" stop-color="#27FDC7" />
+      </linearGradient>
+
+      <path id="todo__line" stroke="url(#lineGradient)" d="M21 12.3h168v0.1z"></path>
+      <path
+        id="todo__box"
+        stroke="url(#boxGradient)"
+        d="M21 12.7v5c0 1.3-1 2.3-2.3 2.3H8.3C7 20 6 19 6 17.7V7.3C6 6 7 5 8.3 5h10.4C20 5 21 6 21 7.3v5.4"
+      ></path>
+      <path id="todo__check" stroke="url(#boxGradient)" d="M10 13l2 2 5-5"></path>
+      <circle id="todo__circle" cx="13.5" cy="12.5" r="10"></circle>
+    </defs>
+  </svg>
+
+  <div class="todo-list">
+    <label class="todo">
+      <input class="todo__state" type="checkbox" />
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 200 25"
+        class="todo__icon"
+      >
+        <use xlink:href="#todo__line" class="todo__line"></use>
+        <use xlink:href="#todo__box" class="todo__box"></use>
+        <use xlink:href="#todo__check" class="todo__check"></use>
+        <use xlink:href="#todo__circle" class="todo__circle"></use>
+      </svg>
+
+      <div class="todo__text">Do a very important task</div>
+    </label>
+
+    <label class="todo">
+      <input class="todo__state" type="checkbox" />
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 200 25"
+        class="todo__icon"
+      >
+        <use xlink:href="#todo__line" class="todo__line"></use>
+        <use xlink:href="#todo__box" class="todo__box"></use>
+        <use xlink:href="#todo__check" class="todo__check"></use>
+        <use xlink:href="#todo__circle" class="todo__circle"></use>
+      </svg>
+
+      <div class="todo__text">Another important task</div>
+    </label>
+
+    <label class="todo">
+      <input class="todo__state" type="checkbox" />
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 200 25"
+        class="todo__icon"
+      >
+        <use xlink:href="#todo__line" class="todo__line"></use>
+        <use xlink:href="#todo__box" class="todo__box"></use>
+        <use xlink:href="#todo__check" class="todo__check"></use>
+        <use xlink:href="#todo__circle" class="todo__circle"></use>
+      </svg>
+
+      <div class="todo__text">Not so important task</div>
+    </label>
+  </div>
 </template>
 <script lang="ts"></script>
 <style scoped lang="scss">
-body {
-  background-color: #100e17;
-  font-family: 'Open Sans', sans-serif;
+$duration: 0.8s;
+
+.todo-list {
+  background: #fff;
+  font-size: 20px;
+  max-width: 15em;
+  margin: auto;
+  padding: 0.5em 1em;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
 }
 
-.container {
-  position: absolute;
-  height: 300px;
-  width: 600px;
-  top: 60px;
-  left: calc(50% - 300px);
-  display: flex;
-}
-
-.card {
-  display: flex;
-  height: 280px;
-  width: 200px;
-  background-color: #17141d;
-  border-radius: 10px;
-  box-shadow: -1rem 0 3rem #000;
-  /*   margin-left: -50px; */
-  transition: 0.4s ease-out;
+.todo {
+  display: block;
   position: relative;
-  left: 0px;
+  padding: 1em 1em 1em 16%;
+  margin: 0 auto;
+  cursor: pointer;
+  border-bottom: solid 1px #ddd;
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
-.card:not(:first-child) {
-  margin-left: -50px;
-}
-
-.card:hover {
-  transform: translateY(-20px);
-  transition: 0.4s ease-out;
-}
-
-.card:hover ~ .card {
-  position: relative;
-  left: 50px;
-  transition: 0.4s ease-out;
-}
-
-.title {
-  color: white;
-  font-weight: 300;
+.todo__state {
   position: absolute;
-  left: 20px;
-  top: 15px;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 
-.bar {
+.todo__text {
+  color: saturate(#1b4a4e, 15%);
+  transition: all $duration / 2 linear $duration / 2;
+}
+
+.todo__icon {
   position: absolute;
-  top: 100px;
-  left: 20px;
-  height: 5px;
-  width: 150px;
-}
-
-.emptybar {
-  background-color: #2e3033;
+  top: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
+  height: auto;
+  margin: auto;
+
+  fill: none;
+  stroke: #27fdc7;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.todo__line,
+.todo__box,
+.todo__check {
+  transition: stroke-dashoffset $duration cubic-bezier(0.9, 0, 0.5, 1);
+}
+
+.todo__circle {
+  stroke: #27fdc7;
+  stroke-dasharray: 1 6;
+  stroke-width: 0;
+
+  transform-origin: 13.5px 12.5px;
+  transform: scale(0.4) rotate(0deg);
+  animation: none $duration linear;
+
+  @keyframes explode {
+    30% {
+      stroke-width: 3;
+      stroke-opacity: 1;
+      transform: scale(0.8) rotate(40deg);
+    }
+    100% {
+      stroke-width: 0;
+      stroke-opacity: 0;
+      transform: scale(1.1) rotate(60deg);
+    }
+  }
+}
+
+.todo__box {
+  stroke-dasharray: 56.1053, 56.1053;
+  stroke-dashoffset: 0;
+  transition-delay: $duration * 0.2;
+}
+
+.todo__check {
+  stroke: #27fdc7;
+  stroke-dasharray: 9.8995, 9.8995;
+  stroke-dashoffset: 9.8995;
+  transition-duration: $duration * 0.4;
+}
+
+.todo__line {
+  stroke-dasharray: 168, 1684;
+  stroke-dashoffset: 168;
+}
+
+.todo__circle {
+  animation-delay: $duration * 0.7;
+  animation-duration: $duration * 0.7;
+}
+
+.todo__state:checked {
+  ~ .todo__text {
+    transition-delay: 0s;
+    color: #5ebec1;
+    opacity: 0.6;
+  }
+
+  ~ .todo__icon .todo__box {
+    stroke-dashoffset: 56.1053;
+    transition-delay: 0s;
+  }
+
+  ~ .todo__icon .todo__line {
+    stroke-dashoffset: -8;
+  }
+
+  ~ .todo__icon .todo__check {
+    stroke-dashoffset: 0;
+    transition-delay: $duration * 0.6;
+  }
+
+  ~ .todo__icon .todo__circle {
+    animation-name: explode;
+  }
+}
+
+html {
+  background: #ddd;
+}
+
+html {
   height: 100%;
+  display: flex;
 }
 
-.filledbar {
-  position: absolute;
-  top: 0px;
-  z-index: 3;
-  width: 0px;
-  height: 100%;
-  background: rgb(0, 154, 217);
-  background: linear-gradient(
-    90deg,
-    rgba(0, 154, 217, 1) 0%,
-    rgba(217, 147, 0, 1) 65%,
-    rgba(255, 186, 0, 1) 100%
-  );
-  transition: 0.6s ease-out;
-}
-
-.card:hover .filledbar {
-  width: 120px;
-  transition: 0.4s ease-out;
-}
-
-.circle {
-  position: absolute;
-  top: 150px;
-  left: calc(50% - 60px);
-}
-
-.stroke {
-  stroke: white;
-  stroke-dasharray: 360;
-  stroke-dashoffset: 360;
-  transition: 0.6s ease-out;
-}
-
-svg {
-  fill: #17141d;
-  stroke-width: 2px;
-}
-
-.card:hover .stroke {
-  stroke-dashoffset: 100;
-  transition: 0.6s ease-out;
+body {
+  width: 100%;
+  margin: auto;
 }
 </style>

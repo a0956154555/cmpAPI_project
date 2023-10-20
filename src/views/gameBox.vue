@@ -1,7 +1,23 @@
 <template>
   <div class="gameAllOuter">
-    <div class="gameBoxInside">
-      <button
+    <div class="gameBoxInside" v-if="!randomNumBool">
+      <div
+        class="flip-card"
+        :class="openCardsAll[index] ? 'goRotate' : ''"
+        tabIndex="0"
+        v-for="(i, index) in randNum"
+        @click="openCard(index, i)"
+      >
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <h3>猜猜看</h3>
+          </div>
+          <div class="flip-card-back">
+            <h3>{{ i }}</h3>
+          </div>
+        </div>
+      </div>
+      <!-- <button
         v-for="(i, index) in 9"
         class="singleNum"
         :class="{ movePosition: startPlay, opacityNum: opacityBoolean }"
@@ -25,7 +41,7 @@
         v-if="showNew"
         @click="pushText($event, index)"
         :disabled="correctPoint > 21"
-      ></button>
+      ></button> -->
     </div>
     <div v-if="!randomNumBool">Score:{{ correctPoint }}</div>
     <div v-if="correctPoint > 21" class="pointOverNotice">已超過範圍，將不會納入點數保存</div>
@@ -47,7 +63,7 @@
 <script setup lang="ts">
 import { useCounterStore } from '../stores/counter'
 import { nextTick } from 'vue'
-import { computed, ref, reactive } from 'vue'
+import { computed, ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 const counterStore = useCounterStore()
@@ -57,14 +73,32 @@ let randomNumBool: Ref<boolean> = ref(true)
 let opacityBoolean: Ref<boolean> = ref(false)
 let noneDiv: Ref<boolean> = ref(false)
 let showNew: Ref<boolean> = ref(false)
+
+let openCardsAll: Ref<boolean[]> = ref([false, false, false, false, false, false, false, false])
 let random1: number[] = [3, 4, 1, 2, 5, 6, 7, 9, 8]
 let random2: number[] = [7, 9, 8, 3, 4, 5, 6, 1, 2]
 let random3: number[] = [5, 6, 7, 4, 1, 9, 8, 3, 2]
 let correctPoint: Ref<number> = ref(0)
 let finallyNum: number = 0
+let randNum: Ref<number[]> = ref([])
+let randomNumSet = new Set()
+onMounted(() => {
+  const min = 1
+  const max = 8
+
+  while (randNum.value.length < 8) {
+    const randomNum = Math.floor(Math.random() * (max - min + 1)) + min
+
+    if (!randomNumSet.has(randomNum)) {
+      randomNumSet.add(randomNum)
+      randNum.value.push(randomNum)
+    }
+  }
+  console.log(randNum)
+})
 const savePoint = () => {
   counterStore.allRecords.push({
-    email: counterStore.person.email,
+    acc: counterStore.person.acc,
     date: `${new Date().getMonth() + 1}/${new Date().getDate()}`,
     point: correctPoint.value
   })
@@ -123,6 +157,13 @@ const startGame = () => {
     startPlay.value = false
   }, 3000)
 }
+// 打開卡片
+const openCard = (idx: number, i: any): void => {
+  openCardsAll.value[idx] = true
+  console.log(i)
+  correctPoint.value += i
+}
+
 // click 按鈕
 var animateButton = function (e: any) {
   e.preventDefault
@@ -142,6 +183,25 @@ for (var i = 0; i < bubblyButtons.length; i++) {
 }
 </script>
 <style lang="scss" scoped>
+@keyframes animate {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  50.1% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
 .gameAllOuter {
   width: 100%;
   height: 90vh;
@@ -151,13 +211,16 @@ for (var i = 0; i < bubblyButtons.length; i++) {
   align-items: center;
   .gameBoxInside {
     position: relative;
-    width: 50%;
+    width: 60%;
     height: 80%;
     border: 1px black solid;
     display: flex;
     flex-wrap: wrap;
+    border: 1px solid #2a3cad;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px #2a3cad;
     transition: 2s;
-    padding: 30px 5px 0px;
+    padding: 30px 0px 0px 35px;
     .singleNum {
       width: calc(33.33% - 6px);
       margin: 0px 3px;
@@ -179,6 +242,23 @@ for (var i = 0; i < bubblyButtons.length; i++) {
     .opacityNum {
       opacity: 0;
       transition: 2s;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: 0.5s;
+      pointer-events: none;
+    }
+    &:hover {
+      &::before {
+        left: -50%;
+        transform: skewX(-5deg);
+      }
     }
   }
   .pointOverNotice {
@@ -383,5 +463,73 @@ body {
       0% 0%,
       0% 0%;
   }
+}
+// ------------------------每個卡片點擊
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.flip-card {
+  background-color: transparent;
+  width: 150px;
+  height: 150px;
+  perspective: 1000px;
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+}
+
+.flip-card:focus {
+  outline: 0;
+}
+
+.goRotate .flip-card-inner,
+.goRotate .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.flip-card-front {
+  background: linear-gradient(to left, #4364f7, #6fb1fc);
+  color: black;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-card-back {
+  background: linear-gradient(to right, #4364f7, #6fb1fc);
+  color: white;
+  transform: rotateY(180deg);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h3 {
+  font-size: 20px;
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+  color: #fff;
 }
 </style>

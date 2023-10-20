@@ -9,7 +9,7 @@ interface Member {
   point: number
 }
 interface records {
-  email: string
+  acc: string
   date: string
   point: number
 }
@@ -25,6 +25,7 @@ export const useCounterStore = defineStore('counter', () => {
   let loginCheck: Ref<boolean> = ref(false)
   let allRecords: Ref<records[]> = ref([])
   let allBuyList: Ref<pushInButList[]> = ref([])
+  let userTotalPoint: Ref<number> = ref(0)
   const person: Member = reactive({
     acc: 'nan',
     password: 'nan',
@@ -43,5 +44,14 @@ export const useCounterStore = defineStore('counter', () => {
     }
   }
 
-  return { userAcc, userPassword, login, person, loginCheck, allRecords, allBuyList }
+  return {
+    userAcc,
+    userPassword,
+    login,
+    person,
+    loginCheck,
+    allRecords,
+    allBuyList,
+    userTotalPoint
+  }
 })

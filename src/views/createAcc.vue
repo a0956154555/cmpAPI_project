@@ -105,7 +105,7 @@
 
       <!-- Remind Passowrd -->
       <div id="formFooter">
-        <a class="underlineHover" href="#">Forgot Password?</a>
+        <!-- <a class="underlineHover" href="#">Forgot Password?</a> -->
       </div>
     </div>
   </div>
@@ -201,6 +201,7 @@ const checkCount = () => {
   signPassword.value = ''
   signEmail.value = ''
   alert('註冊成功')
+  counterStore.loginCheck = true
 }
 </script>
 <style lang="scss" scoped>
