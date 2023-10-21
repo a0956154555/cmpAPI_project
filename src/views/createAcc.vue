@@ -131,7 +131,7 @@ import { useLocalStorage, useMouse } from '@vueuse/core'
 import { vElementHover } from '@vueuse/components'
 import gsap from 'gsap'
 const counterStore = useCounterStore()
-// const value = useLocalStorage('myKey', 'default-value')
+const value = useLocalStorage('myKey', 'default-value')
 // hover改變字體
 const isHovered = ref(false)
 function onHover(state: boolean) {
