@@ -73,6 +73,7 @@ let allLink: string[] = reactive([
       >{{ counterStore.person.acc == 'nan' ? 'TS' : 'USER : ' + counterStore.person.acc }}
       <span v-if="counterStore.person.acc !== 'nan'">Point:{{ counterStore.person.point }}</span></a
     >
+
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
     <ul class="menu">
@@ -171,7 +172,8 @@ a {
   .singleLink {
     display: block;
     padding: 20px 20px;
-    border-right: 1px solid #f4f4f4;
+    width: 120px;
+    border-right: 1px solid #f4e7e7;
     text-decoration: none;
   }
 }
