@@ -46,7 +46,14 @@
     <div v-if="!randomNumBool">Score:{{ correctPoint }}</div>
     <div v-if="correctPoint > 21" class="pointOverNotice">已超過範圍，將不會納入點數保存</div>
     <div>
-      <button class="bubbly-button" @click="startGame" v-if="randomNumBool">開始</button>
+      <button
+        class="bubbly-button"
+        @click="startGame"
+        v-if="randomNumBool"
+        v-element-hover="onHover"
+      >
+        {{ isHovered ? 'Start!!' : '開始' }}
+      </button>
       <button
         class="bubbly-button"
         @click="savePoint"
@@ -66,6 +73,14 @@ import { nextTick } from 'vue'
 import { computed, ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { vElementHover } from '@vueuse/components'
+
+// hover改變字
+const isHovered = ref(false)
+function onHover(state: boolean) {
+  isHovered.value = state
+}
+// -----------
 const counterStore = useCounterStore()
 const router = useRouter()
 let startPlay: Ref<boolean> = ref(false)

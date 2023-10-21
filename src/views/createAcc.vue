@@ -79,7 +79,13 @@
           @input="typePassword"
         />
         <div class="noticeAll" v-if="passwordBoolean">請輸入8~12位元</div>
-        <input type="submit" class="fadeIn fourth" :value="'註冊'" @click.prevent="checkCount" />
+        <input
+          type="submit"
+          class="fadeIn fourth"
+          :value="isHovered ? 'Sign In' : '註冊'"
+          @click.prevent="checkCount"
+          v-element-hover="onHover"
+        />
       </form>
       <!-- Login Form -->
       <form v-if="chooseWhich">
@@ -100,7 +106,13 @@
           :placeholder="'登入密碼'"
           v-model="password"
         />
-        <input type="submit" class="fadeIn fourth" :value="'登入'" @click.prevent="login" />
+        <input
+          type="submit"
+          class="fadeIn fourth"
+          :value="isHovered ? 'Join In' : '登入'"
+          @click.prevent="login"
+          v-element-hover="onHover"
+        />
       </form>
 
       <!-- Remind Passowrd -->
@@ -113,10 +125,18 @@
 <script setup lang="ts">
 import { useCounterStore } from '../stores/counter'
 import { nextTick } from 'vue'
-import { computed, ref, reactive } from 'vue'
+import { computed, ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue'
-import { useLocalStorage } from '@vueuse/core'
+import { useLocalStorage, useMouse } from '@vueuse/core'
+import { vElementHover } from '@vueuse/components'
+import gsap from 'gsap'
 const counterStore = useCounterStore()
+// const value = useLocalStorage('myKey', 'default-value')
+// hover改變字體
+const isHovered = ref(false)
+function onHover(state: boolean) {
+  isHovered.value = state
+}
 // 註冊帳密
 const signAccPattern = /^(?=.*[a-zA-Z]).{8,12}$/
 const signPasswordPattern = /^.{8,12}$/
@@ -154,6 +174,16 @@ const typePassword = () => {
     passwordBoolean.value = true
   }
 }
+// loginBox 移動
+// onMounted(() => {
+//   const loginBox: Ref<string> = ref('loginBox')
+//   gsap.to(loginBox.value, {
+//     x: 200,
+//     duration: 2,
+//     ease: 'power2.inOut'
+//   })
+// })
+
 // 正則驗證信箱
 const typeEmail = () => {
   let isValid = signEmailPattern.test(signEmail.value)
@@ -176,8 +206,19 @@ const login = () => {
     alert('登入失敗')
   }
 }
+// const loginBox = ref(null)
+// onMounted(() => {
+//   // 这里可以执行你的动画逻辑
+//   gsap.to(loginBox.value, {
+//     x: 500,
+//     duration: 2,
+//     ease: 'power2.inOut'
+//   })
+// })
 function updateChooseWhich(change: boolean): void {
   chooseWhich.value = change
+
+  // --------------
 }
 const checkCount = () => {
   if (

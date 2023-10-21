@@ -5,6 +5,7 @@
       :class="'card--' + (index + 1)"
       v-for="(i, index) in allCards"
       @click="checkBuy(i.name, i.price, i.picRoute)"
+      ref="card"
     >
       <div class="card__info-hover">
         <svg class="card__like" viewBox="0 0 24 24">
@@ -45,7 +46,7 @@
 <script setup lang="ts">
 import { useCounterStore } from '../stores/counter'
 import { nextTick } from 'vue'
-import { computed, ref, reactive } from 'vue'
+import { computed, ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 const counterStore = useCounterStore()
