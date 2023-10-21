@@ -23,6 +23,7 @@ interface fav_items {
   name: string
   type: string
   point: number
+  src: string
 }
 export const useCounterStore = defineStore('counter', () => {
   let userAcc: Ref<string> = ref('')

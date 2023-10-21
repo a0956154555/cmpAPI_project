@@ -5,7 +5,7 @@
       :class="'card--' + (index + 1)"
       v-for="(i, index) in allCards"
       ref="card"
-      @click.prevent.stop="fav_list1('飾品', i.name, i.price)"
+      @click.prevent.stop="fav_list1('飾品', i.name, i.price, i.picRoute)"
     >
       <div class="card__info-hover">
         <svg class="card__like" viewBox="0 0 24 24">
@@ -52,7 +52,7 @@ import { computed, ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 const counterStore = useCounterStore()
-const fav_list1 = (type: string, name: string, price: number): void => {
+const fav_list1 = (type: string, name: string, price: number, src: string): void => {
   for (let i = 0; i < counterStore.fav_list.length; i++) {
     if (counterStore.fav_list[i].name == name) {
       counterStore.fav_list.splice(i, 1)
@@ -62,7 +62,8 @@ const fav_list1 = (type: string, name: string, price: number): void => {
   counterStore.fav_list.push({
     name: name,
     type: type,
-    point: price
+    point: price,
+    src: src
   })
   console.log(counterStore.fav_list)
 }
