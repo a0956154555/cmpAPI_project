@@ -1,41 +1,4 @@
 <template>
-  <!-- <div class="typeAll">
-    <div class="typeBox">
-      <div class="boxTitle">
-        <div :class="{ chooseThis: chooseWhich }" @click="updateChooseWhich(true)">登入</div>
-        <div :class="{ chooseThis: !chooseWhich }" @click="updateChooseWhich(false)">註冊</div>
-      </div>
-      <div v-if="chooseWhich" class="loginAll">
-        <label>
-          帳號
-          <input type="text" v-model="acc" />
-        </label>
-        <label>
-          密碼
-          <input type="password" v-model="password" />
-        </label>
-      </div>
-      <div class="signAll" v-if="!chooseWhich">
-        <label>
-          帳號
-          <input type="text" v-model="signAcc" @input="typeAcc" />
-        </label>
-        <div class="noticeAll" v-if="accBoolean">請輸入8~12位元，至少含一個英文字</div>
-        <label>
-          密碼
-          <input type="password" v-model="signPassword" @input="typePassword" />
-        </label>
-        <div class="noticeAll" v-if="passwordBoolean">請輸入8~12位元</div>
-        <label>
-          信箱
-          <input type="text" @input="typeEmail" v-model="signEmail" />
-        </label>
-        <div class="noticeAll" v-if="emailBoolean">請輸入正確信箱</div>
-      </div>
-      <button @click="login" v-if="chooseWhich">登入</button>
-      <button @click="checkCount" v-if="!chooseWhich">註冊</button>
-    </div>
-  </div> -->
   <!-- ---------------------------------------- -->
   <div class="wrapper fadeInDown">
     <div id="formContent">
@@ -131,7 +94,7 @@ import { useLocalStorage, useMouse } from '@vueuse/core'
 import { vElementHover } from '@vueuse/components'
 import gsap from 'gsap'
 const counterStore = useCounterStore()
-const value = useLocalStorage('myKey', 'default-value')
+
 // hover改變字體
 const isHovered = ref(false)
 function onHover(state: boolean) {
@@ -235,6 +198,10 @@ const checkCount = () => {
   }
   counterStore.person.acc = signAcc.value
   counterStore.person.password = signPassword.value
+  const personAcc = useLocalStorage('personAcc', signAcc.value)
+  acc.value = signAcc.value
+  password.value = signPassword.value
+  const personPassword = useLocalStorage('personPassword', signPassword.value)
   counterStore.person.email = signEmail.value
   counterStore.person.point = 0
   console.log(counterStore.person)

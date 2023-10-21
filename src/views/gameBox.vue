@@ -7,6 +7,9 @@
         tabIndex="0"
         v-for="(i, index) in randNum"
         @click="openCard(index, i)"
+        :ref="`singleCard${index}`"
+        @mousemove="floatCard(index)"
+        @mouseleave="leaveCard(index)"
       >
         <div class="flip-card-inner">
           <div class="flip-card-front">
@@ -51,6 +54,7 @@
         @click="startGame"
         v-if="randomNumBool"
         v-element-hover="onHover"
+        ref="floatBtn"
       >
         {{ isHovered ? 'Start!!' : '開始' }}
       </button>
@@ -74,7 +78,7 @@ import { computed, ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { vElementHover } from '@vueuse/components'
-
+import gsap from 'gsap'
 // hover改變字
 const isHovered = ref(false)
 function onHover(state: boolean) {
@@ -97,6 +101,17 @@ let correctPoint: Ref<number> = ref(0)
 let finallyNum: number = 0
 let randNum: Ref<number[]> = ref([])
 let randomNumSet = new Set()
+let floatBtn = ref(null)
+// singleCard${index}
+let singleCard0 = ref(null)
+let singleCard1 = ref(null)
+let singleCard2 = ref(null)
+let singleCard3 = ref(null)
+let singleCard4 = ref(null)
+let singleCard5 = ref(null)
+let singleCard6 = ref(null)
+let singleCard7 = ref(null)
+let singleCard8 = ref(null)
 onMounted(() => {
   const min = 1
   const max = 8
@@ -110,7 +125,618 @@ onMounted(() => {
     }
   }
   console.log(randNum)
+  // :ref="`singleCard${index}`
+  gsap.to(floatBtn.value, {
+    y: -20, // 向上浮动
+    duration: 1,
+    ease: 'power2.inOut',
+    repeat: -1, // 无限循环
+    yoyo: true // 循环时反向运动
+  })
 })
+// const openCardsAll = ref([false, false, false, false, false, false]);
+// const randNum = ref([0, 1, 2, 3, 4, 5]);
+
+const floatCard = (index: number) => {
+  if (index == 0) {
+    gsap.to(singleCard0.value, {
+      y: -20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  } else if (index == 1) {
+    gsap.to(singleCard1.value, {
+      y: -20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  } else if (index == 2) {
+    gsap.to(singleCard2.value, {
+      y: -20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  } else if (index == 3) {
+    gsap.to(singleCard3.value, {
+      y: -20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  } else if (index == 4) {
+    gsap.to(singleCard4.value, {
+      y: -20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  } else if (index == 5) {
+    gsap.to(singleCard5.value, {
+      y: -20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  } else if (index == 6) {
+    gsap.to(singleCard6.value, {
+      y: -20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  } else if (index == 7) {
+    gsap.to(singleCard7.value, {
+      y: -20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  } else if (index == 8) {
+    gsap.to(singleCard8.value, {
+      y: -20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  }
+}
+const leaveCard = (idx: number) => {
+  if (idx === 0) {
+    gsap.to(singleCard1.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard2.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard3.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard4.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard5.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard6.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard7.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard8.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    // ------------------------------------------------
+  } else if (idx == 1) {
+    gsap.to(singleCard0.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard2.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard3.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard4.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard5.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard6.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard7.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard8.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    // ---------------------------------------------------
+  } else if (idx == 2) {
+    gsap.to(singleCard0.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard1.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard3.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard4.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard5.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard6.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard7.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard8.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    // --------------------------------------------
+  } else if (idx == 3) {
+    gsap.to(singleCard0.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard1.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard2.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard4.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard5.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard6.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard7.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard8.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    // ----------------------------------------
+  } else if (idx == 4) {
+    gsap.to(singleCard0.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard1.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard2.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard3.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard5.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard6.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard7.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard8.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    // ------------------------------------------------
+  } else if (idx == 5) {
+    gsap.to(singleCard0.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard1.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard2.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard3.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard4.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard6.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard7.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard8.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    // -------------------------------------------
+  } else if (idx == 6) {
+    gsap.to(singleCard0.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard1.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard2.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard3.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard4.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard5.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard7.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard8.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    // ----------------------------------------------
+  } else if (idx == 7) {
+    gsap.to(singleCard0.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard1.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard2.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard3.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard4.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard5.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard6.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard8.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    // -----------------------------------------------
+  } else if (idx == 8) {
+    gsap.to(singleCard0.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard1.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard2.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard3.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard4.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard5.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard6.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+    gsap.to(singleCard7.value, {
+      y: 20, // 向上浮动
+      duration: 0.2,
+      ease: 'power2.inOut',
+      // 无限循环
+      yoyo: true // 循环时反向运动
+    })
+  }
+}
+
 const savePoint = () => {
   counterStore.allRecords.push({
     acc: counterStore.person.acc,
@@ -153,6 +779,7 @@ const startGame = () => {
     alert('需先登入')
     return
   }
+  gsap.killTweensOf(floatBtn.value)
   startPlay.value = true
   randomNumBool.value = false
 
@@ -235,7 +862,7 @@ for (var i = 0; i < bubblyButtons.length; i++) {
     border-radius: 4px;
     box-shadow: 0px 0px 5px #2a3cad;
     transition: 2s;
-    padding: 30px 0px 0px 35px;
+    padding: 30px 0px 50px 35px;
     .singleNum {
       width: calc(33.33% - 6px);
       margin: 0px 3px;

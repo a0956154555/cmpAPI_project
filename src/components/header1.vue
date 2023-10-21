@@ -3,7 +3,7 @@ import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { defineComponent, ref, reactive, onMounted } from 'vue'
 import { useCounterStore } from '../stores/counter'
-
+import { vElementHover } from '@vueuse/components'
 const counterStore = useCounterStore()
 const router = useRouter()
 const logOutMember = () => {
@@ -21,12 +21,26 @@ onMounted(() => {
   // 执行你的逻辑，例如路由导航
   router.push('/createAcc')
 })
+// hover改變字體
+const isHovered = reactive(Array(6).fill(false)) // 假设有 6 个链接
+
+const onHover = (state: boolean, index: number) => {
+  isHovered[index] = state
+}
 let headerAllArr: string[] = reactive([
   '創建/登入',
   '遊戲紀錄',
   '遊戲區',
   '購物商城',
   '購買清單',
+  'test'
+])
+let headerAllEngArr: string[] = reactive([
+  'Sign/Join',
+  'Records',
+  'Game',
+  'Shopping',
+  'BuyList',
   'test'
 ])
 let allLink: string[] = reactive([
@@ -64,7 +78,8 @@ let allLink: string[] = reactive([
         :to="allLink[index]"
         :key="index"
         class="singleLink"
-        >{{ i }}</router-link
+        v-element-hover="(state) => onHover(state, index)"
+        >{{ isHovered[index] ? headerAllEngArr[index] : headerAllArr[index] }}</router-link
       >
       <!-- <li><a href="#work">Our Work</a></li>
       <li><a href="#about">About</a></li>
