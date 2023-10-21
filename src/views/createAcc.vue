@@ -1,6 +1,11 @@
 <template>
   <!-- ---------------------------------------- -->
-  <div class="wrapper fadeInDown">
+  <div
+    class="wrapper fadeInDown draggable-element"
+    :style="style"
+    style="position: fixed"
+    ref="draggableElement"
+  >
     <div id="formContent">
       <!-- Tabs Titles -->
       <h2
@@ -90,11 +95,16 @@ import { useCounterStore } from '../stores/counter'
 import { nextTick } from 'vue'
 import { computed, ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue'
-import { useLocalStorage, useMouse } from '@vueuse/core'
+import { useLocalStorage, useMouse, useDraggable } from '@vueuse/core'
 import { vElementHover } from '@vueuse/components'
 import gsap from 'gsap'
 const counterStore = useCounterStore()
 
+const draggableElement = ref<HTMLElement | null>(null)
+
+const { x, y, style } = useDraggable(draggableElement, {
+  initialValue: { x: 40, y: 40 }
+})
 // hover改變字體
 const isHovered = ref(false)
 function onHover(state: boolean) {
