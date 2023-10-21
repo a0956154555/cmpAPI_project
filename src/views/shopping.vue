@@ -4,13 +4,15 @@
       class="card"
       :class="'card--' + (index + 1)"
       v-for="(i, index) in allCards"
-      @click="checkBuy(i.name, i.price, i.picRoute)"
       ref="card"
+      @click.prevent.stop="fav_list1('飾品', i.name, i.price)"
     >
       <div class="card__info-hover">
         <svg class="card__like" viewBox="0 0 24 24">
           <path
-            fill="#000000"
+            :fill="
+              counterStore.fav_list.findIndex((v) => v.name == i.name) > -1 ? '#FF0000' : '#000000'
+            "
             d="M12.1,18.55L12,18.65L11.89,18.55C7.14,14.24 4,11.39 4,8.5C4,6.5 5.5,5 7.5,5C9.04,5 10.54,6 11.07,7.36H12.93C13.46,6 14.96,5 16.5,5C18.5,5 20,6.5 20,8.5C20,11.39 16.86,14.24 12.1,18.55M16.5,3C14.76,3 13.09,3.81 12,5.08C10.91,3.81 9.24,3 7.5,3C4.42,3 2,5.41 2,8.5C2,12.27 5.4,15.36 10.55,20.03L12,21.35L13.45,20.03C18.6,15.36 22,12.27 22,8.5C22,5.41 19.58,3 16.5,3Z"
           />
         </svg>
@@ -26,7 +28,7 @@
       <a href="#" class="card_link">
         <div class="card__img--hover"></div>
       </a>
-      <div class="card__info">
+      <div class="card__info" @click.stop="checkBuy(i.name, i.price, i.picRoute)">
         <span class="card__category">飾品</span>
         <h3 class="card__title">{{ i.name }}</h3>
         <span class="card__by"
@@ -50,7 +52,20 @@ import { computed, ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 const counterStore = useCounterStore()
-
+const fav_list1 = (type: string, name: string, price: number): void => {
+  for (let i = 0; i < counterStore.fav_list.length; i++) {
+    if (counterStore.fav_list[i].name == name) {
+      counterStore.fav_list.splice(i, 1)
+      return
+    }
+  }
+  counterStore.fav_list.push({
+    name: name,
+    type: type,
+    point: price
+  })
+  console.log(counterStore.fav_list)
+}
 const checkBuy = (name: string, price: number, src: string): void => {
   if (counterStore.person.point < price) {
     alert('點數不足')
@@ -185,7 +200,7 @@ body {
 
 .card--1 .card__img,
 .card--1 .card__img--hover {
-  background-image: url('../../public/all_images/6526c1b3404df.jpg');
+  background-image: url('../../public/all_images/6526c327c3284.png');
 }
 
 .card--2 .card__img,
@@ -194,28 +209,28 @@ body {
 }
 .card--3 .card__img,
 .card--3 .card__img--hover {
-  background-image: url('../../public/all_images/6526c27c7cb13.jpg');
+  background-image: url('../../public/all_images/6526c4dba72fe.jpg');
 }
 .card--4 .card__img,
 .card--4 .card__img--hover {
-  background-image: url('../../public/all_images/6526c327c3284.png');
+  background-image: url('../../public/all_images/6526c6aa3718a.png');
 }
 
 .card--5 .card__img,
 .card--5 .card__img--hover {
-  background-image: url('../../public/all_images/6526c4dba72fe.jpg');
+  background-image: url('../../public/all_images/6526c27c7cb13.jpg');
 }
 .card--6 .card__img,
 .card--6 .card__img--hover {
-  background-image: url('../../public/all_images/6526c6aa3718a.png');
+  background-image: url('../../public/all_images/6526ce01edd19.png');
 }
 .card--7 .card__img,
 .card--7 .card__img--hover {
-  background-image: url('../../public/all_images/6526ce01edd19.png');
+  background-image: url('../../public/all_images/6526ce347f0fa.png');
 }
 .card--8 .card__img,
 .card--8 .card__img--hover {
-  background-image: url('../../public/all_images/6526ce347f0fa.png');
+  background-image: url('../../public/all_images/6526ce742341b.jpg');
 }
 .card__like {
   width: 18px;
@@ -249,6 +264,7 @@ body {
 }
 
 .card__info-hover {
+  cursor: pointer;
   position: absolute;
   padding: 16px;
   width: 100%;
@@ -284,6 +300,7 @@ body {
 }
 
 .card__info {
+  cursor: pointer;
   z-index: 2;
   background-color: #fff;
   border-bottom-left-radius: 12px;

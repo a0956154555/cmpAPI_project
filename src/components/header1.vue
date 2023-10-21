@@ -33,6 +33,7 @@ let headerAllArr: string[] = reactive([
   '遊戲區',
   '購物商城',
   '購買清單',
+  '珍藏清單',
   'test'
 ])
 let headerAllEngArr: string[] = reactive([
@@ -41,6 +42,7 @@ let headerAllEngArr: string[] = reactive([
   'Game',
   'Shopping',
   'BuyList',
+  'FavList',
   'test'
 ])
 let allLink: string[] = reactive([
@@ -49,6 +51,7 @@ let allLink: string[] = reactive([
   '/gameBox',
   '/shopping',
   '/buyLists',
+  '/FavLists',
   '/test'
 ])
 </script>
