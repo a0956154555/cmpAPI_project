@@ -75,7 +75,7 @@
           v-model="password"
         />
         <input
-          type="submit"
+          type="button"
           class="fadeIn fourth"
           :value="isHovered ? 'Join In' : '登入'"
           @click.prevent="login"
@@ -101,7 +101,7 @@ import gsap from 'gsap'
 const counterStore = useCounterStore()
 
 const draggableElement = ref<HTMLElement | null>(null)
-
+const box = ref(null)
 const { x, y, style } = useDraggable(draggableElement, {
   initialValue: { x: 40, y: 40 }
 })

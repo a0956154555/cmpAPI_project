@@ -1,6 +1,6 @@
 <template>
   <div class="gameAllOuter">
-    <div class="gameBoxInside" v-if="!randomNumBool">
+    <div class="gameBoxInside" v-if="!randomNumBool" ref="box">
       <div
         class="flip-card"
         :class="openCardsAll[index] ? 'goRotate' : ''"
@@ -102,6 +102,7 @@ let finallyNum: number = 0
 let randNum: Ref<number[]> = ref([])
 let randomNumSet = new Set()
 let floatBtn = ref(null)
+const box = ref(null)
 // singleCard${index}
 let singleCard0 = ref(null)
 let singleCard1 = ref(null)
@@ -752,9 +753,29 @@ const savePoint = () => {
     return
   }
   counterStore.person.point += correctPoint.value
-  setTimeout(() => {
-    router.push('/gameRecord')
+  gsap.to(box.value, {
+    x: -900, // 向右移动 100 像素
+    duration: 0.2, // 持续时间为 0.25 秒
+    ease: 'power1.inOut', // 缓动函数
+    yoyo: true, // 循环播放反向动画
+
+    onComplete: () => {
+      gsap.to(box.value, {
+        x: 1500, // 向右移动 100 像素
+        duration: 0.4, // 持续时间为 0.25 秒
+        ease: 'power1.inOut', // 缓动函数
+        yoyo: true, // 循环播放反向动画
+        onComplete: () => {
+          setTimeout(() => {
+            router.push('/gameRecord')
+          }, 1300)
+        }
+      })
+    }
   })
+  // setTimeout(() => {
+  //   router.push('/gameRecord')
+  // })
 }
 const pushText = (e: any, index: number) => {
   // 获取目标元素

@@ -1,19 +1,50 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useCounterStore } from '../stores/counter'
+import gsap from 'gsap'
 const counterStore = useCounterStore()
+const box = ref(null)
+onMounted(() => {
+  gsap.to(box.value, {
+    fontSize: '20px',
+    x: 50, // 向右移动 100 像素
+    duration: 0.5, // 持续时间为 0.25 秒
+    ease: 'power1.inOut', // 缓动函数
+    yoyo: true, // 循环播放反向动画
+    opacity: 0.3, // 目标不透明度值，取值范围从0（完全透明）到1（完全不透明）
+    onComplete: () => {
+      gsap.to(box.value, {
+        opacity: 1,
+        fontSize: '40px',
+        x: -10, // 向右移动 100 像素
+        duration: 0.5, // 持续时间为 0.25 秒
+        ease: 'power1.inOut', // 缓动函数
+        yoyo: true, // 循环播放反向动画
+        onComplete: () => {
+          gsap.to(box.value, {
+            opacity: 0.5,
+            repeat: -1, // 无限重复播放
+            duration: 1, // 持续时间为 0.25 秒
+            ease: 'power1.inOut', // 缓动函数
+            yoyo: true // 循环播放反向动画
+          })
+        }
+      })
+    }
+  })
+})
 let fav_list = counterStore.fav_list
 </script>
 
 <template>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 
-  <div class="content" v-if="fav_list.length < 1">
+  <div class="content" v-if="fav_list.length < 1" ref="box">
     <div class="content__container">
       <p class="content__container__text">您好!</p>
 
       <ul class="content__container__list">
-        <li class="content__container__list__item">目前為空</li>
+        <li class="content__container__list__item">去玩遊戲</li>
         <li class="content__container__list__item">獲得點數</li>
         <li class="content__container__list__item">來換獎勵</li>
         <li class="content__container__list__item">只差你了</li>
@@ -44,132 +75,6 @@ let fav_list = counterStore.fav_list
           </div>
         </div>
       </div>
-      <!-- <div class="col" ontouchstart="this.classList.toggle('hover');">
-        <div class="container">
-          <div class="front" style="url(https://unsplash.it/511/511/)">
-            <div class="inner">
-              <p>Rocogged</p>
-              <span>Lorem ipsum</span>
-            </div>
-          </div>
-          <div class="back">
-            <div class="inner">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit
-                quae suscipit c.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="col" ontouchstart="this.classList.toggle('hover');">
-        <div class="container">
-          <div class="front" style="background-image: url(https://unsplash.it/502/502/)">
-            <div class="inner">
-              <p>Strizzes</p>
-              <span>Lorem ipsum</span>
-            </div>
-          </div>
-          <div class="back">
-            <div class="inner">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit
-                quae suscipit c.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="col" ontouchstart="this.classList.toggle('hover');">
-        <div class="container">
-          <div class="front" style="background-image: url(https://unsplash.it/503/503/)">
-            <div class="inner">
-              <p>Clossyo</p>
-              <span>Lorem ipsum</span>
-            </div>
-          </div>
-          <div class="back">
-            <div class="inner">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit
-                quae suscipit c.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="col" ontouchstart="this.classList.toggle('hover');">
-        <div class="container">
-          <div class="front" style="background-image: url(https://unsplash.it/504/504/">
-            <div class="inner">
-              <p>Rendann</p>
-              <span>Lorem ipsum</span>
-            </div>
-          </div>
-          <div class="back">
-            <div class="inner">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit
-                quae suscipit c.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="col" ontouchstart="this.classList.toggle('hover');">
-        <div class="container">
-          <div class="front" style="background-image: url(https://unsplash.it/505/505/)">
-            <div class="inner">
-              <p>Reflupper</p>
-              <span>Lorem ipsum</span>
-            </div>
-          </div>
-          <div class="back">
-            <div class="inner">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit
-                quae suscipit c.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="col" ontouchstart="this.classList.toggle('hover');">
-        <div class="container">
-          <div class="front" style="background-image: url(https://unsplash.it/506/506/)">
-            <div class="inner">
-              <p>Acirassi</p>
-              <span>Lorem ipsum</span>
-            </div>
-          </div>
-          <div class="back">
-            <div class="inner">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit
-                quae suscipit c.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="col" ontouchstart="this.classList.toggle('hover');">
-        <div class="container">
-          <div class="front" style="background-image: url(https://unsplash.it/508/508/)">
-            <div class="inner">
-              <p>Sohanidd</p>
-              <span>Lorem ipsum</span>
-            </div>
-          </div>
-          <div class="back">
-            <div class="inner">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit
-                quae suscipit c.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
