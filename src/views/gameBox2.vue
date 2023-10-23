@@ -349,21 +349,25 @@ const nextQuestion = (i: string, ans?: number): void => {
           <label>{{ i.questionCount }}</label>
 
           <div class="chooseAns" v-if="i.showChoose">
-            <input
-              type="radio"
-              class="trueOrNot"
-              :name="`${index}`"
-              @click="nextQuestion(i.choose1)"
-            />
-            {{ i.choose1 }}
+            <label class="chooseOption">
+              <input
+                type="radio"
+                class="trueOrNot"
+                :name="`${index}`"
+                @click="nextQuestion(i.choose1)"
+              />
+              {{ i.choose1 }}
+            </label>
 
-            <input
-              type="radio"
-              class="trueOrNot"
-              :name="`${index}`"
-              @click="nextQuestion(i.choose2)"
-            />
-            {{ i.choose2 }}
+            <label class="chooseOption">
+              <input
+                type="radio"
+                class="trueOrNot"
+                :name="`${index}`"
+                @click="nextQuestion(i.choose2)"
+              />
+              {{ i.choose2 }}
+            </label>
           </div>
         </div>
 
@@ -386,27 +390,46 @@ const nextQuestion = (i: string, ans?: number): void => {
           <label>{{ i.questionCount }}</label>
 
           <div class="chooseAns" v-if="i.showChoose">
-            <input
-              type="radio"
-              class="trueOrNot"
-              :name="`${index}`"
-              @click="nextQuestion(i.choose1, i.ansTrue)"
-            />
-            {{ i.choose1 }}
+            <label class="chooseOption">
+              <input
+                type="radio"
+                class="trueOrNot"
+                :name="`${index}`"
+                @click="nextQuestion(i.choose1, i.ansTrue)"
+              />
+              <div>{{ i.choose1 }}</div>
+            </label>
 
-            <input
-              type="radio"
-              class="trueOrNot"
-              :name="`${index}`"
-              @click="nextQuestion(i.choose2, i.ansFalse)"
-            />
-            {{ i.choose2 }}
+            <label class="chooseOption">
+              <input
+                type="radio"
+                class="trueOrNot"
+                :name="`${index}`"
+                @click="nextQuestion(i.choose2, i.ansFalse)"
+              />
+              <div>{{ i.choose2 }}</div>
+            </label>
           </div>
         </div>
       </div>
     </div>
-    <div class="ansBox" v-if="showComplete">
-      <div class="mainAnsBox">
+    <div
+      class="ansBox"
+      v-if="showComplete"
+      :style="{
+        background:
+          whichResult.name === '鋼系圈'
+            ? 'linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)'
+            : whichResult.name === '貓系圈'
+            ? 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(225,37,215,0.9613970588235294) 45%, rgba(255,0,112,1) 100%)'
+            : whichResult.name === '超能圈'
+            ? 'linear-gradient(90deg, rgba(2,0,36,0.8801645658263305) 0%, rgba(114,225,37,0.9613970588235294) 46%, rgba(47,193,103,1) 96%)'
+            : whichResult.name === '冰系圈'
+            ? 'linear-gradient(90deg, rgba(2,0,36,0.8801645658263305) 0%, rgba(37,161,225,0.9613970588235294) 46%, rgba(13,232,241,1) 96%)'
+            : ''
+      }"
+    >
+      <div class="mainAnsBox" style="background-color: white">
         <div class="mainFirstPart">
           <div>天生就混</div>
           <div>{{ whichResult.name }}</div>
@@ -508,11 +531,26 @@ h2 small {
     width: 100%;
     justify-content: center;
     margin-top: 20px;
-
+    .chooseOption {
+      position: relative;
+      pointer-events: all;
+      left: 0;
+      display: flex;
+      color: black;
+      top: 0;
+    }
     .trueOrNot {
       width: auto;
       margin: 0px 10px;
       border: 1px red solid;
+    }
+    .chooseOption {
+      position: relative;
+      pointer-events: all;
+      left: 0;
+      display: flex;
+      color: black;
+      top: 0;
     }
   }
 }
@@ -635,7 +673,8 @@ input:focus ~ .highlight {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
+  padding-top: 50px;
   .mainAnsBox {
     width: 50%;
     height: 100%;
