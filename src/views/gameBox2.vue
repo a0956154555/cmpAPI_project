@@ -451,7 +451,7 @@ const nextQuestion = (i: string, ans?: number): void => {
           </div>
 
           <div class="insideImg">
-            <img :src="'/all_images/' + whichResult.pic" alt="" />
+            <img :src="'/cmpAPI_project/all_images/' + whichResult.pic" alt="" />
           </div>
         </div>
         <div class="mainThirdPart">

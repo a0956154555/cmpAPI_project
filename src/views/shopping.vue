@@ -98,42 +98,42 @@ interface singlePic {
 let allCards: Ref<singlePic[]> = ref([
   {
     name: '圓嘟嘟藍藍豚鑰匙圈',
-    picRoute: '/all_images/6526c327c3284.png',
+    picRoute: '/cmpAPI_project/all_images/6526c327c3284.png',
     price: 10
   },
   {
     name: '湛藍海豚抱枕',
-    picRoute: '/all_images/6526c1ff572ac.jpg',
+    picRoute: '/cmpAPI_project/all_images/6526c1ff572ac.jpg',
     price: 25
   },
   {
     name: '微笑鯊魚娃娃',
-    picRoute: '/all_images/6526c4dba72fe.jpg',
+    picRoute: '/cmpAPI_project/all_images/6526c4dba72fe.jpg',
     price: 50
   },
   {
     name: '粉紅海豹抱枕',
-    picRoute: '/all_images/6526c6aa3718a.png',
+    picRoute: '/cmpAPI_project/all_images/6526c6aa3718a.png',
     price: 120
   },
   {
     name: '黑鯊抱枕',
-    picRoute: '/all_images/6526c27c7cb13.jpg',
+    picRoute: '/cmpAPI_project/all_images/6526c27c7cb13.jpg',
     price: 333
   },
   {
     name: '艾利鯊鯊枕',
-    picRoute: '/all_images/6526ce01edd19.png',
+    picRoute: '/cmpAPI_project/all_images/6526ce01edd19.png',
     price: 450
   },
   {
     name: 'QQ長長橘橘',
-    picRoute: '/all_images/6526ce347f0fa.png',
+    picRoute: '/cmpAPI_project/all_images/6526ce347f0fa.png',
     price: 20
   },
   {
     name: '水水藍藍',
-    picRoute: '/all_images/6526ce742341b.jpg',
+    picRoute: '/cmpAPI_project/all_images/6526ce742341b.jpg',
     price: 111
   }
 ])
