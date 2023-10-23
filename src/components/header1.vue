@@ -38,9 +38,30 @@ const onHover = (state: boolean, index: number) => {
 const onSingleHover = (state: boolean) => {
   isSingleHover.value = state
 }
-let headerAllArr: string[] = reactive(['遊戲紀錄', '遊戲區', '購物商城', '購買清單', '珍藏清單'])
-let headerAllEngArr: string[] = reactive(['Records', 'Game', 'Shopping', 'BuyList', 'FavList'])
-let allLink: string[] = reactive(['/gameRecord', '/gameBox', '/shopping', '/buyLists', '/FavLists'])
+let headerAllArr: string[] = reactive([
+  '遊戲紀錄',
+  '遊戲區',
+  '遊戲區2',
+  '購物商城',
+  '購買清單',
+  '珍藏清單'
+])
+let headerAllEngArr: string[] = reactive([
+  'Records',
+  'Game',
+  'Game2',
+  'Shopping',
+  'BuyList',
+  'FavList'
+])
+let allLink: string[] = reactive([
+  '/gameRecord',
+  '/gameBox',
+  '/gameBox2',
+  '/shopping',
+  '/buyLists',
+  '/FavLists'
+])
 </script>
 
 <template>

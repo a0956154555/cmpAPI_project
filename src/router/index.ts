@@ -34,6 +34,14 @@ const router = createRouter({
       component: () => import('../views/gameBox.vue')
     },
     {
+      path: '/gameBox2',
+      name: 'gameBox2',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/gameBox2.vue')
+    },
+    {
       path: '/gameRecord',
       name: 'gameRecord',
       // route level code-splitting
