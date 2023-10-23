@@ -98,42 +98,42 @@ interface singlePic {
 let allCards: Ref<singlePic[]> = ref([
   {
     name: '圓嘟嘟藍藍豚鑰匙圈',
-    picRoute: '../../public/all_images/6526c327c3284.png',
+    picRoute: '/all_images/6526c327c3284.png',
     price: 10
   },
   {
     name: '湛藍海豚抱枕',
-    picRoute: '../../public/all_images/6526c1ff572ac.jpg',
+    picRoute: '/all_images/6526c1ff572ac.jpg',
     price: 25
   },
   {
     name: '微笑鯊魚娃娃',
-    picRoute: '../../public/all_images/6526c4dba72fe.jpg',
+    picRoute: '/all_images/6526c4dba72fe.jpg',
     price: 50
   },
   {
     name: '粉紅海豹抱枕',
-    picRoute: '../../public/all_images/6526c6aa3718a.png',
+    picRoute: '/all_images/6526c6aa3718a.png',
     price: 120
   },
   {
     name: '黑鯊抱枕',
-    picRoute: '../../public/all_images/6526c27c7cb13.jpg',
+    picRoute: '/all_images/6526c27c7cb13.jpg',
     price: 333
   },
   {
     name: '艾利鯊鯊枕',
-    picRoute: '../../public/all_images/6526ce01edd19.png',
+    picRoute: '/all_images/6526ce01edd19.png',
     price: 450
   },
   {
     name: 'QQ長長橘橘',
-    picRoute: '../../public/all_images/6526ce347f0fa.png',
+    picRoute: '/all_images/6526ce347f0fa.png',
     price: 20
   },
   {
     name: '水水藍藍',
-    picRoute: '../../public/all_images/6526ce742341b.jpg',
+    picRoute: '/all_images/6526ce742341b.jpg',
     price: 111
   }
 ])
@@ -201,37 +201,37 @@ body {
 
 .card--1 .card__img,
 .card--1 .card__img--hover {
-  background-image: url('../../public/all_images/6526c327c3284.png');
+  background-image: url('/all_images/6526c327c3284.png');
 }
 
 .card--2 .card__img,
 .card--2 .card__img--hover {
-  background-image: url('../../public/all_images/6526c1ff572ac.jpg');
+  background-image: url('/all_images/6526c1ff572ac.jpg');
 }
 .card--3 .card__img,
 .card--3 .card__img--hover {
-  background-image: url('../../public/all_images/6526c4dba72fe.jpg');
+  background-image: url('/all_images/6526c4dba72fe.jpg');
 }
 .card--4 .card__img,
 .card--4 .card__img--hover {
-  background-image: url('../../public/all_images/6526c6aa3718a.png');
+  background-image: url('/all_images/6526c6aa3718a.png');
 }
 
 .card--5 .card__img,
 .card--5 .card__img--hover {
-  background-image: url('../../public/all_images/6526c27c7cb13.jpg');
+  background-image: url('/all_images/6526c27c7cb13.jpg');
 }
 .card--6 .card__img,
 .card--6 .card__img--hover {
-  background-image: url('../../public/all_images/6526ce01edd19.png');
+  background-image: url('/all_images/6526ce01edd19.png');
 }
 .card--7 .card__img,
 .card--7 .card__img--hover {
-  background-image: url('../../public/all_images/6526ce347f0fa.png');
+  background-image: url('/all_images/6526ce347f0fa.png');
 }
 .card--8 .card__img,
 .card--8 .card__img--hover {
-  background-image: url('../../public/all_images/6526ce742341b.jpg');
+  background-image: url('/all_images/6526ce742341b.jpg');
 }
 .card__like {
   width: 18px;
