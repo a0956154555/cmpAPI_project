@@ -450,7 +450,10 @@ const nextQuestion = (i: string, ans?: number): void => {
           </div>
 
           <div class="insideImg">
-            <img :src="'../../public/all_images/' + whichResult.pic" alt="" />
+            <img
+              :src="'https://a0956154555.github.io/public/all_images/' + whichResult.pic"
+              alt=""
+            />
           </div>
         </div>
         <div class="mainThirdPart">
