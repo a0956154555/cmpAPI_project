@@ -1,5 +1,13 @@
 <template>
   <div class="gameAllOuter">
+    <div class="ruleBox" v-if="showRule" @click="showRule = !showRule">
+      <div class="ruleMainBox" ref="ruleGsap">
+        <div class="ruleTitle">遊戲規則</div>
+        <div class="ruleDetail">
+          按下開始後裡面有1~9隨機數字,點擊卡片即可累加,若超過21點及判定失敗,在那之前點擊完成可累積點數
+        </div>
+      </div>
+    </div>
     <div class="gameBoxInside" v-if="!randomNumBool" ref="box">
       <div
         class="flip-card"
@@ -102,6 +110,8 @@ let finallyNum: number = 0
 let randNum: Ref<number[]> = ref([])
 let randomNumSet = new Set()
 let floatBtn = ref(null)
+let ruleGsap = ref(null)
+let showRule = ref(true)
 const box = ref(null)
 // singleCard${index}
 let singleCard0 = ref(null)
@@ -114,6 +124,14 @@ let singleCard6 = ref(null)
 let singleCard7 = ref(null)
 let singleCard8 = ref(null)
 onMounted(() => {
+  gsap.to(ruleGsap.value, {
+    y: -20, // 向上浮动
+    duration: 1.5,
+    ease: 'power2.inOut',
+    repeat: -1, // 无限循环
+    yoyo: true // 循环时反向运动
+  })
+  // --------------------------------------------------
   const min = 1
   const max = 8
 
@@ -872,6 +890,35 @@ for (var i = 0; i < bubblyButtons.length; i++) {
   display: flex;
   justify-content: center;
   align-items: center;
+  .ruleBox {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    .ruleMainBox {
+      width: 600px;
+      height: 300px;
+      border: 2px black solid;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 15px;
+      z-index: 2;
+      .ruleTitle {
+        font-size: 25px;
+
+        margin-bottom: 10px;
+      }
+      .ruleDetail {
+        width: 80%;
+      }
+    }
+  }
   .gameBoxInside {
     position: relative;
     width: 60%;

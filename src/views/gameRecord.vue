@@ -3,7 +3,7 @@
     <!-- <div v-if="allRec.length < 1 || !counterStore.loginCheck">目前為空</div> -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 
-    <div class="content" v-if="counterStore.person.email == 'nan'" ref="box">
+    <div class="content" ref="box" v-if="allRec.length < 1">
       <div class="content__container">
         <p class="content__container__text">您好!</p>
 

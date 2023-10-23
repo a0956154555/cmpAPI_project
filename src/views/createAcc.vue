@@ -5,6 +5,7 @@
     :style="style"
     style="position: fixed"
     ref="draggableElement"
+    v-if="counterStore.person.acc == 'nan'"
   >
     <div id="formContent">
       <!-- Tabs Titles -->

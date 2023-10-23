@@ -3,7 +3,7 @@
     <!-- <div v-if="counterStore.person.email == 'nan'">尚未登入</div> -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 
-    <div class="content" v-if="counterStore.person.email == 'nan'" ref="box">
+    <div class="content" v-if="counterStore.allBuyList.length < 1" ref="box">
       <div class="content__container">
         <p class="content__container__text">您好!</p>
 
