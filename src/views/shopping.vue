@@ -8,7 +8,10 @@
     >
       {{ i }}
     </div>
+    <div class="priceBtn" @click="priceReform('高到低')">價錢高->低</div>
+    <div class="priceBtn" @click="priceReform('低到高')">價錢低->高</div>
   </div>
+
   <section class="cards">
     <article
       class="card"
@@ -69,6 +72,13 @@ const showOnceType = computed(() => {
 })
 const bkImg = (route: string) => {
   return `/cmpAPI_project/all_images/${route}`
+}
+const priceReform = (i: string): void => {
+  if (i == '高到低') {
+    nowTypeArr.value.sort((i, j) => j.price - i.price)
+  } else if (i == '低到高') {
+    nowTypeArr.value.sort((i, j) => i.price - j.price)
+  }
 }
 const nowTypeArr = ref<singlePic[]>([])
 
@@ -245,6 +255,19 @@ body {
     margin-bottom: 20px;
     cursor: pointer;
     transition: 0.3s;
+    &:hover {
+      background-color: hsla(160, 100%, 37%, 0.2);
+    }
+  }
+  .priceBtn {
+    width: 100%;
+    margin-bottom: 30px;
+    font-size: 14px;
+    padding: 0px 5px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 1px #b8b7b7;
+    border-radius: 100px;
+    transition: 0.5s;
     &:hover {
       background-color: hsla(160, 100%, 37%, 0.2);
     }
