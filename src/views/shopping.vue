@@ -1,11 +1,22 @@
 <template>
+  <div class="chooseTypeAll">
+    <div
+      v-for="(i, index) in showOnceType"
+      :key="index"
+      class="singleType"
+      @click="showWhichProd(i)"
+    >
+      {{ i }}
+    </div>
+  </div>
   <section class="cards">
     <article
       class="card"
       :class="'card--' + (index + 1)"
-      v-for="(i, index) in allCards"
+      v-for="(i, index) in nowTypeArr"
+      :key="i.name"
       ref="card"
-      @click.prevent.stop="fav_list1('飾品', i.name, i.price, i.picRoute)"
+      @click.prevent.stop="fav_list1(i.type, i.name, i.price, i.picRoute)"
     >
       <div class="card__info-hover">
         <svg class="card__like" viewBox="0 0 24 24">
@@ -24,12 +35,12 @@
           ><span class="card__time">15 min</span>
         </div>
       </div>
-      <div class="card__img"></div>
+      <div class="card__img" :style="{ backgroundImage: `url(${i.picRoute})` }"></div>
       <a href="#" class="card_link">
-        <div class="card__img--hover"></div>
+        <div class="card__img--hover" :style="{ backgroundImage: `url(${i.picRoute})` }"></div>
       </a>
       <div class="card__info" @click.stop="checkBuy(i.name, i.price, i.picRoute)">
-        <span class="card__category">飾品</span>
+        <span class="card__category">{{ i.type }}</span>
         <h3 class="card__title">{{ i.name }}</h3>
         <span class="card__by"
           >點數 <a href="#" class="card__author" title="author">{{ i.price }}點</a></span
@@ -37,13 +48,6 @@
       </div>
     </article>
   </section>
-  <!-- <div class="shoppingAll">
-    <div v-for="i in allCards" class="sigleCardAll" @click="checkBuy(i.name, i.price, i.picRoute)">
-      <img :src="i.picRoute" alt="" />
-      <div>{{ i.name }}</div>
-      <div>需要 : {{ i.price }} 點</div>
-    </div>
-  </div> -->
 </template>
 <script setup lang="ts">
 import { useCounterStore } from '../stores/counter'
@@ -52,6 +56,35 @@ import { computed, ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue'
 import { useRouter } from 'vue-router'
 const counterStore = useCounterStore()
+const showOnceType = computed(() => {
+  const uniqueTypeSet = new Set<string>()
+
+  allCards.value.forEach((card) => {
+    uniqueTypeSet.add(card.type)
+  })
+  const uniqueTypesArray = Array.from(uniqueTypeSet)
+  uniqueTypesArray.unshift('所有種類')
+
+  return uniqueTypesArray
+})
+const bkImg = (route: string) => {
+  return `/cmpAPI_project/all_images/${route}`
+}
+const nowTypeArr = ref<singlePic[]>([])
+
+const showWhichProd = (i: string): void => {
+  nowTypeArr.value = []
+  if (i == '所有種類') {
+    nowTypeArr.value = allCards.value
+    return
+  }
+  allCards.value.forEach((item) => {
+    if (item.type == i) {
+      nowTypeArr.value.push(item)
+      console.log(nowTypeArr.value)
+    }
+  })
+}
 const fav_list1 = (type: string, name: string, price: number, src: string): void => {
   for (let i = 0; i < counterStore.fav_list.length; i++) {
     if (counterStore.fav_list[i].name == name) {
@@ -92,51 +125,61 @@ const checkBuy = (name: string, price: number, src: string): void => {
 }
 interface singlePic {
   name: string
+  type: string
   picRoute: string
   price: number
 }
 let allCards: Ref<singlePic[]> = ref([
   {
     name: '圓嘟嘟藍藍豚鑰匙圈',
+    type: '飾品',
     picRoute: '/cmpAPI_project/all_images/6526c327c3284.png',
     price: 10
   },
   {
     name: '湛藍海豚抱枕',
+    type: '抱枕',
     picRoute: '/cmpAPI_project/all_images/6526c1ff572ac.jpg',
     price: 25
   },
   {
     name: '微笑鯊魚娃娃',
+    type: '娃娃',
     picRoute: '/cmpAPI_project/all_images/6526c4dba72fe.jpg',
     price: 50
   },
   {
     name: '粉紅海豹抱枕',
+    type: '抱枕',
     picRoute: '/cmpAPI_project/all_images/6526c6aa3718a.png',
     price: 120
   },
   {
     name: '黑鯊抱枕',
+    type: '抱枕',
     picRoute: '/cmpAPI_project/all_images/6526c27c7cb13.jpg',
     price: 333
   },
   {
     name: '艾利鯊鯊枕',
+    type: '抱枕',
     picRoute: '/cmpAPI_project/all_images/6526ce01edd19.png',
     price: 450
   },
   {
     name: 'QQ長長橘橘',
+    type: '娃娃',
     picRoute: '/cmpAPI_project/all_images/6526ce347f0fa.png',
     price: 20
   },
   {
     name: '水水藍藍',
+    type: '娃娃',
     picRoute: '/cmpAPI_project/all_images/6526ce742341b.jpg',
     price: 111
   }
 ])
+nowTypeArr.value = allCards.value
 // let allRecords: Ref<records[]> = ref([])
 </script>
 <style lang="scss" scoped>
@@ -188,7 +231,25 @@ body {
   justify-content: center;
   align-items: center;
 }
+.chooseTypeAll {
+  position: absolute;
+  left: 20px;
+  top: 20%;
+  width: 100px;
+  height: 500px;
 
+  .singleType {
+    width: 100%;
+    border-bottom: 1px rgb(69, 68, 68) solid;
+    padding: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background-color: hsla(160, 100%, 37%, 0.2);
+    }
+  }
+}
 .cards {
   width: 100%;
   display: flex;
@@ -199,40 +260,6 @@ body {
   height: 500px;
 }
 
-.card--1 .card__img,
-.card--1 .card__img--hover {
-  background-image: url('/all_images/6526c327c3284.png');
-}
-
-.card--2 .card__img,
-.card--2 .card__img--hover {
-  background-image: url('/all_images/6526c1ff572ac.jpg');
-}
-.card--3 .card__img,
-.card--3 .card__img--hover {
-  background-image: url('/all_images/6526c4dba72fe.jpg');
-}
-.card--4 .card__img,
-.card--4 .card__img--hover {
-  background-image: url('/all_images/6526c6aa3718a.png');
-}
-
-.card--5 .card__img,
-.card--5 .card__img--hover {
-  background-image: url('/all_images/6526c27c7cb13.jpg');
-}
-.card--6 .card__img,
-.card--6 .card__img--hover {
-  background-image: url('/all_images/6526ce01edd19.png');
-}
-.card--7 .card__img,
-.card--7 .card__img--hover {
-  background-image: url('/all_images/6526ce347f0fa.png');
-}
-.card--8 .card__img,
-.card--8 .card__img--hover {
-  background-image: url('/all_images/6526ce742341b.jpg');
-}
 .card__like {
   width: 18px;
 }
